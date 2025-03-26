@@ -180,6 +180,16 @@ if(isset($_POST['delete'])){
                             $result = $conn->query($sql);
 							if($result->num_rows){
                             while($row = mysqli_fetch_array($result)){
+								$jobid = $row['id'];
+								$query = "SELECT COUNT(*) AS applicant_count FROM job_applications WHERE job_id = '$jobid'";
+								$applicantResult = $conn->query($query);
+								$applicantRow = mysqli_fetch_assoc($applicantResult);
+								$applicantCount = $applicantRow['applicant_count'];
+
+								$query1 = "SELECT COUNT(*) AS hired_count FROM job_applications WHERE job_id = '$jobid' AND candidate_status = 'Hired'";
+								$applicantResult1 = $conn->query($query1);
+								$applicantRow1 = mysqli_fetch_assoc($applicantResult1);
+								$hiredCount = $applicantRow1['hired_count'];
                             ?>
 							<div class="col-lg-6 col-xl-4 col-xxl-3">
 								<div class="card card-default mt-24px">
@@ -190,7 +200,7 @@ if(isset($_POST['delete'])){
 										<a href="javascript:0" class="row justify-content-center ec-vendor-detail mt-3">
 											<div class="image mb-3">
 												<h5 class="card-title text-dark"><?= $row['job_title'];?></h5>
-												<p>10 Applicant</p>
+												<p><?= $applicantCount; ?> Applicant</p>
 											</div>
 											<ul class="list-unstyled">
 												<li class="d-flex mb-3">
@@ -208,8 +218,8 @@ if(isset($_POST['delete'])){
 											</ul>
 										</a>
 										<div class="row justify-content-center ec-vendor-detail mt-3">
-											<progress id="progressBar" value="1" max="<?= $row['no_of_applicant'];?>"></progress>
-											<p><?= "01";?> of <?= $row['no_of_applicant'];?> filled</p>
+											<progress id="progressBar" value="<?= $hiredCount;?>" max="<?= $row['no_of_applicant'];?>"></progress>
+											<p><?= $hiredCount;?> of <?= $row['no_of_applicant'];?> filled</p>
 										</div>
 									</div>
 								</div>

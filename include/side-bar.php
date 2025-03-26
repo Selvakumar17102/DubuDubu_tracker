@@ -14,7 +14,7 @@ include("include/connection.php");
 	<div id="sidebar" class="sidebar ec-sidebar-footer">
 		<div class="ec-brand">
 			<a href="profile_dashboard.php" title="DubuDubu">
-				<img class="ec-brand-icon" src="assets/img/logo/favicon.png" alt="" />&nbsp;&nbsp;
+				<!-- <img class="ec-brand-icon" src="assets/img/logo/favicon.png" alt="" />&nbsp;&nbsp; -->
 				<span class="ec-brand-name text-truncate">DUBU DUBU</span>
 			</a>	
 		</div>
@@ -341,7 +341,7 @@ include("include/connection.php");
 							</a>
 						</li>
 							
-						<!-- pay roll -->
+						<!-- Recruitment -->
 						<li class="has-sub <?php echo $recruitment; ?>">
 							<?
 								if($recruitment_boolean != 'true'){
@@ -374,7 +374,7 @@ include("include/connection.php");
 						</li>
 							
 						<!-- Comp-off -->
-						<li class="<?php echo $comp; ?>">
+						<!-- <li class="<?php echo $comp; ?>">
 							<?php
 								if($comp_boolean != 'true'){
 									$comp_boolean = 'false';
@@ -384,7 +384,7 @@ include("include/connection.php");
 								<i class="mdi mdi-account-switch"></i>
 								<span class="nav-text">Comp-off</span>
 							</a>
-						</li>
+						</li> -->
 							
 						<!-- Department -->
 						<!-- <li class="<?php echo $dept; ?>">
@@ -400,7 +400,7 @@ include("include/connection.php");
 						</li> -->
 							
 						<!-- Client -->
-						<li class="<?php echo $client; ?>">
+						<!-- <li class="<?php echo $client; ?>">
 							<?php
 								if($clientBoolean != 'true'){
 									$clientBoolean = 'false';
@@ -410,10 +410,10 @@ include("include/connection.php");
 								<i class="mdi  mdi-account-multiple-plus" ></i>
 								<span class="nav-text">client</span>
 							</a>
-						</li>
+						</li> -->
 							
 						<!-- Project -->
-						<li class="<?php echo $project; ?>">
+						<!-- <li class="<?php echo $project; ?>">
 							<?php
 								if($projectBoolean != 'true'){
 									$projectBoolean = 'false';
@@ -423,10 +423,10 @@ include("include/connection.php");
 								<i class="mdi mdi-file-powerpoint-box" ></i>
 								<span class="nav-text">project</span>
 							</a>
-						</li>
+						</li> -->
 							
 						<!-- Task -->
-						<li class="<?php echo $task; ?>">
+						<!-- <li class="<?php echo $task; ?>">
 							<?php
 								if($taskBoolean != 'true'){
 									$taskBoolean = 'false';
@@ -436,10 +436,10 @@ include("include/connection.php");
 								<i class="mdi mdi-clipboard-check-outline"></i>
 								<span class="nav-text">Task</span>
 							</a>
-						</li>
+						</li> -->
 							
 						<!-- Time Sheet -->
-						<li class="has-sub <?php echo $timeSheet; ?>">
+						<!-- <li class="has-sub <?php echo $timeSheet; ?>">
 							<?php
 								if($timeBoolean != 'true'){
 									$timeBoolean = 'false';
@@ -479,10 +479,10 @@ include("include/connection.php");
 									</li>
 								</ul>
 							</div>
-						</li>
+						</li> -->
 									
 						<!-- Invoice Service -->
-						<li class="<?php echo $invoice_service; ?>">
+						<!-- <li class="<?php echo $invoice_service; ?>">
 							<?php
 								if($invoiceServiceBoolean != 'true'){
 									$invoiceServiceBoolean = 'false';
@@ -492,10 +492,10 @@ include("include/connection.php");
 								<i class="mdi mdi-note-text" ></i>
 								<span class="nav-text">Invoice Service</span>
 							</a>
-						</li>
+						</li> -->
 
 						<!-- Invoice -->
-						<li class="<?php echo $invoice; ?>">
+						<!-- <li class="<?php echo $invoice; ?>">
 							<?php
 								if($invoiceBoolean != 'true'){
 									$invoiceBoolean = 'false';
@@ -505,10 +505,10 @@ include("include/connection.php");
 								<i class="mdi mdi-note-text" ></i>
 								<span class="nav-text">Invoice</span>
 							</a>
-						</li>
+						</li> -->
 
 						<!-- Leave Utilization -->
-						<li class = "<?php echo $leaveUti; ?>">
+						<!-- <li class = "<?php echo $leaveUti; ?>">
 							<?php
 								if($leaveUti_boolean != 'true'){
 									$leaveUti_boolean = 'false';
@@ -518,10 +518,10 @@ include("include/connection.php");
 								<i class="mdi mdi-format-list-checks"></i>
 								<span class="nav-text">Leave Utilization</span>
 							</a>
-						</li>
+						</li> -->
 							
 						<!-- Payslip -->
-						<li class = "<?php echo $payslip; ?>">
+						<!-- <li class = "<?php echo $payslip; ?>">
 							<?php
 								if($payslip_boolean != 'true'){
 									$payslip_boolean = 'false';
@@ -531,7 +531,7 @@ include("include/connection.php");
 								<i class="mdi mdi-file-document-box" ></i>
 								<span class="nav-text">Payslip</span>
 							</a>
-						</li>
+						</li> -->
 
 						<!-- Payslip -->
 						<!-- <li class = "<?php echo $payslip2; ?>">
