@@ -68,19 +68,7 @@ $row1 = $result1->fetch_assoc();
         
     </head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tabler-icons@1.39.1/iconfont/tabler-icons.min.css">
-    <style>
-        .file-icon {
-            cursor: pointer;
-            font-size: 24px;
-        }
-    </style>
-    <style>
-        .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
-            border: 1px solid #eeeeee !important;
-            width: 100%;
-            border-radius: 15px;
-        }
-    </style>
+
     <body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-layout="vertical" data-pc-direction="ltr" data-pc-theme_contrast="" data-pc-theme="light">
        
         <div class="container-fluid">

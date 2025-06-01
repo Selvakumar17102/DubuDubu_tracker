@@ -56,6 +56,15 @@ $alldataResult = $conn->query($alldataSql);
 	<!-- FAVICON -->
 	<link href="assets/img/favicon.png" rel="shortcut icon" />
 
+	<!-- Include Bootstrap (if not already included) -->
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include Select2 CSS & JS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+
 </head>
 <style>
     .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
@@ -401,6 +410,50 @@ $alldataResult = $conn->query($alldataSql);
 												<div class="form-group mb-4">
 													<label for="salary">Salary<span style="color:red;font-weight:bold">*</span></label>
 													<input type="number" class="form-control" id="salaryamo" name="salary" placeholder="Salary"value="<?php echo $row['basic_salary']?>" required>
+												</div>
+											</div>
+
+											<hr>
+
+											<h4><b>Referral Details</b></h4>
+											<div class="row mt-5">
+												<div class="col-lg-4">
+													<div class="form-group mb-4">
+														<label for="referral">Referral<span style="color:red;font-weight:bold">*</span></label>
+														<select class="form-control" id="referral" name="referral" required onchange="toggleReferralDetails()">
+															<option value="No" <?php echo ($row['referral'] == 'No') ? 'selected' : ''; ?>>No</option>
+															<option value="Yes" <?php echo ($row['referral'] == 'Yes') ? 'selected' : ''; ?>>Yes</option>
+														</select>
+													</div>
+												</div>
+											</div>
+
+											<div id="referralDetails" style="display: <?php echo ($row['referral'] == 'Yes') ? 'block' : 'none'; ?>;">
+												<div class="row">
+													<div class="col-lg-4">
+														<div class="form-group mb-4">
+															<label for="refEmployee">Reference Employee<span style="color:red;font-weight:bold">*</span></label>
+															<select class="form- select2" id="refEmployee" name="refEmployee">
+																<option value="">Select Employee</option>
+																<?php
+																
+																$employees = "SELECT id, fname, lname,emp_id FROM employee";
+																$employeesRes = $conn->query($employees);
+																while ($employee = mysqli_fetch_assoc($employeesRes)) {
+																	?>
+																	<option value="<?= $employee['id']; ?>" <?php if($row['refEmployee'] == $employee['id']){ echo "selected"; } ?>><?= $employee['fname'] . ' ' . $employee['lname'] . ' - ' . $employee['emp_id']; ?></option>
+																	<?php
+																}
+																?>
+															</select>
+														</div>
+													</div>
+													<div class="col-lg-4">
+														<div class="form-group mb-4">
+															<label for="bonusAmount">Referral Bonus Amount<span style="color:red;font-weight:bold">*</span></label>
+															<input type="text" class="form-control" id="bonusAmount" name="bonusAmount" placeholder="Enter Bonus Amount" value="<?php echo $row['bonusAmount'] ?? ''; ?>">
+														</div>
+													</div>
 												</div>
 											</div>
 
@@ -763,6 +816,21 @@ $alldataResult = $conn->query($alldataSql);
 </body>
 
 </html>
+
+<!-- Include Select2 JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+<!-- Initialize Select2 -->
+<script>
+    $(document).ready(function() {
+        $('.select2').select2({
+            placeholder: "Select an Employee",
+            allowClear: true,
+            width: '100%'  // Ensures proper width
+        });
+    });
+</script>
+
 <script>
 $('.btnPrevious').click(function() {
   const prevTabLinkEl = $('.nav-tabs .active').closest('li').prev('li').find('a')[0];
@@ -773,6 +841,12 @@ $('.btnPrevious').click(function() {
 
 
 <script>
+	function toggleReferralDetails() {
+        var referral = document.getElementById("referral").value;
+        document.getElementById("referralDetails").style.display = (referral === "Yes") ? "block" : "none";
+    }
+
+	
 	function toggleDisabilityId(select) {
 		var disabilityIdDiv = document.getElementById('disability_id_div');
 		if (select.value === 'yes') {

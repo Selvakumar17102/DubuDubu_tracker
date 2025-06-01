@@ -361,7 +361,7 @@ if(isset($_POST['resignation_submit'])){
 	});
 
 
-	function editterminate(val){
+	function editresigning(val){
 		
 		var employee_id = document.getElementById('employee_id'+val)
 		var notice_date = document.getElementById('notice_date'+val)

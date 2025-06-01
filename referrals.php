@@ -83,71 +83,42 @@ $referrals_page = 'active';
 										<table id="responsive-data-table" class="table">
 											<thead>
                                                 <tr>
-                                                    <th><input type="checkbox"></th>
-                                                    <th>Referrals ID</th>
+                                                    <th>S No</th>
                                                     <th>Referrer Name</th>
                                                     <th>Job Referred</th>
                                                     <th>Referee Name</th>
                                                     <th>Referrals Bonus</th>
-                                                    <th>Actions</th>
+                                                    <th>Referral Date</th>
                                                 </tr>
 											</thead>
 											<tbody>
-                                                <tr>
-                                                    <td><input type="checkbox"></td>
-                                                    <td>Reff-010</td>
-                                                    <td>
-                                                        <strong>Lori Broaddus</strong><br>
-                                                        <small>Finance</small>
-                                                    </td>
-                                                    <td>🎨 Senior Graphic Designer</td>
-                                                    <td>
-                                                        <strong>Joyce Golston</strong><br>
-                                                        <small>joyce@example.com</small>
-                                                    </td>
-                                                    <td>$250</td>
-                                                    <td>
-                                                        <a href="#" class="text-primary"><i class="mdi mdi-pencil"></i></a>
-                                                        <a href="#" class="text-danger"><i class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox"></td>
-                                                    <td>Reff-009</td>
-                                                    <td>
-                                                        <strong>Connie Waters</strong><br>
-                                                        <small>Developer</small>
-                                                    </td>
-                                                    <td>🖌️ Junior UI/UX Designer</td>
-                                                    <td>
-                                                        <strong>Jeffrey Thaler</strong><br>
-                                                        <small>jeffrey@example.com</small>
-                                                    </td>
-                                                    <td>$180</td>
-                                                    <td>
-                                                        <a href="#" class="text-primary"><i class="mdi mdi-pencil"></i></a>
-                                                        <a href="#" class="text-danger"><i class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox"></td>
-                                                    <td>Reff-008</td>
-                                                    <td>
-                                                        <strong>Rebecca Smith</strong><br>
-                                                        <small>Executive</small>
-                                                    </td>
-                                                    <td>💻 Senior HTML Developer</td>
-                                                    <td>
-                                                        <strong>Margaret Soto</strong><br>
-                                                        <small>margaret@example.com</small>
-                                                    </td>
-                                                    <td>$220</td>
-                                                    <td>
-                                                        <a href="#" class="text-primary"><i class="mdi mdi-pencil"></i></a>
-                                                        <a href="#" class="text-danger"><i class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
+												<?php
+												$refEmpSql = "SELECT e.*, d.designation_name, r.fname AS ref_fname, r.lname AS ref_lname, r_designation.designation_name AS ref_designation
+															FROM employee e
+															INNER JOIN designation d ON e.designation = d.desig_id
+															LEFT JOIN employee r ON e.refEmployee = r.id
+															LEFT JOIN designation r_designation ON r.designation = r_designation.desig_id
+															WHERE e.referral = 'Yes'";
+												$refEmpRes = $conn->query($refEmpSql);
+												$i = 1;
+												
+												while ($row = $refEmpRes->fetch_assoc()) { ?>
+													<tr>
+														<td><?= $i++; ?></td>
+														<td>
+															<strong><?= $row['ref_fname'] . ' ' . $row['ref_lname']; ?></strong><br>
+															<small><?= $row['ref_designation']; ?></small>
+														</td>
+														<td><?= $row['designation_name']; ?></td>
+														<td>
+															<strong><?= $row['fname'] . ' ' . $row['lname']; ?></strong><br>
+															<small><?= $row['oemail']; ?></small>
+														</td>
+														<td><?= $row['bonusAmount']; ?></td>
+														<td><?= date('d-m-Y', strtotime($row['doj'])); ?></td>
+													</tr>
+												<?php } ?>
+											</tbody>
 										</table>
 									</div>
 								</div>

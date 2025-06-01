@@ -39,7 +39,7 @@ include("include/connection.php");
 							<hr>
 						</li>
 
-						<!-- Dashboard -->
+						<!-- menu -->
 						<li class="has-sub <?php echo $dashboard; ?>">
 							<?php
 								if($dashboardBoolean != 'true'){
@@ -58,7 +58,7 @@ include("include/connection.php");
 										</a>
 									</li>
 									<li class="<?php echo $mess_apply; ?>">
-										<a class="sidenav-item-link" href="message.php" target="_blank">
+										<a class="sidenav-item-link" href="message.php">
 											<span class="nav-text">Chat</span>
 										</a>
 									</li>
@@ -147,7 +147,7 @@ include("include/connection.php");
 							<hr>
 						</li>
 
-						<!-- Dashboard -->
+						<!-- menu -->
 						<li class="has-sub <?php echo $dashboard; ?>">
 							<?php
 								if($dashboardBoolean != 'true'){
@@ -171,7 +171,7 @@ include("include/connection.php");
 										</a>
 									</li>
 									<li class="<?php echo $mess_apply; ?>">
-										<a class="sidenav-item-link" href="message.php" target="_blank">
+										<a class="sidenav-item-link" href="message.php" >
 											<span class="nav-text">Chat</span>
 										</a>
 									</li>
@@ -236,6 +236,11 @@ include("include/connection.php");
 									<li class="<?php echo $emp_apply; ?>">
 										<a class="sidenav-item-link" href="user-list.php">
 											<span class="nav-text">Employee List</span>
+										</a>
+									</li>
+									<li class="<?php echo $promo_apply; ?>">
+										<a class="sidenav-item-link" href="promotion-list.php">
+											<span class="nav-text">Promotion List</span>
 										</a>
 									</li>
 									<li class="<?php echo $termi_apply; ?>">

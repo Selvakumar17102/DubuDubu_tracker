@@ -22,7 +22,7 @@ if(isset($_POST['name'])){
             
             $employee = [];
             
-            $emp_sql1 = "UPDATE employee SET emp_token = '$emp_token' WHERE id = '$user_id'";
+            $emp_sql1 = "UPDATE employee SET emp_token = '$emp_token',online_status = 'Online' WHERE id = '$user_id'";
             if($conn->query($emp_sql1)){
                 $employee = [
                     'emp_token' => $emp_token,
