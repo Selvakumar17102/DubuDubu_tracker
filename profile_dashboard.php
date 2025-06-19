@@ -14,6 +14,10 @@ if(isset($_SESSION['id'])){
     $row = mysqli_fetch_array($result);
 }
 
+$annocementSql = "SELECT message, created_at FROM announcements ORDER BY id DESC LIMIT 1";
+$annocementresult = $conn->query($annocementSql);
+$annocementrow = mysqli_fetch_array($annocementresult);
+
 // if(isset($_POST['update'])){
 // 	$id = $_POST['user_id'];
 // 	$password = $_POST['UserPassword'];
@@ -26,6 +30,17 @@ if(isset($_SESSION['id'])){
 // 		$error='<div class="alert alert-danger">OOPS Password </div>';
 // 	}
 // }
+
+
+$designation_id = $row['designation'];
+$sql = "SELECT designation_name FROM designation WHERE desig_id = $designation_id";
+$result = $conn->query($sql);
+$designation_name = '';
+
+if ($result->num_rows > 0) {
+    $desig = $result->fetch_assoc();
+    $designation_name = $desig['designation_name'];
+}
 ?>
 
 
@@ -97,37 +112,46 @@ if(isset($_SESSION['id'])){
 			<div class="ec-content-wrapper">
 				<div class="content">
 					<div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
-						<h1>Personal Information</h1>
+						<div>
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb mb-0">
+									<li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Personal Information</li>
+								</ol>
+							</nav>
+						</div>
 					</div>
-						<div class="form-group">
-        					<div class="col-sm-12 ">
-            					<?php echo $error; ?>
-        					</div>
-    					</div>
+
+					<div class="form-group">
+        				<div class="col-sm-12 ">
+							<div class="mt-2">
+								<h6>Recent Announcements:</h6>
+								<ul class="list-group">
+									<li class="list-group-item"><?php echo $annocementrow['message']; ?>
+										<small class="text-muted float-right"><?php echo $annocementrow['created_at']; ?></small>
+									</li>
+								</ul>
+							</div>
+        				</div>
+    				</div>
 					<div class="row">
 						<div class="col-12">
 							<div class="card card-default">
 								<div class="card-header card-header-border-bottom" style="background-color:#bbc2c730">
-									<div class="col-3" style="text-align:center">
-									<?php
-									if($row['emp_photo'] ==""){
-										?>
-										<img src="https://www.pngkey.com/png/detail/305-3050875_employee-parking-add-employee-icon-png.png" class="img-responsive rounded-circle" alt="Avatar Image" width="200" height="170">
-										<?php
-									}else{
-										?>
-										<img src="<?php echo $row['emp_photo']?>" class="img-responsive rounded-circle roundcircles" alt="Avatar Image" width="200" height="170">
-										<?php
-									}
-									?>
-									</div>
+									<div class="col-12 col-md-3 text-center mb-3 mb-md-0">
+                                        <?php if ($row['emp_photo'] == "") { ?>
+                                            <img src="https://www.pngkey.com/png/detail/305-3050875_employee-parking-add-employee-icon-png.png" class="img-fluid rounded-circle" alt="Avatar Image">
+                                        <?php } else { ?>
+                                            <img src="<?php echo $row['emp_photo'] ?>" class="img-responsive rounded-circle roundcircles" alt="Avatar Image">
+                                        <?php } ?>
+                                    </div>
 									<div class="col-7">
 										<div class="d-flex pb-2">
 											<div>
 												<strong class="text-dark" style="font-size:30px"><?php echo $row['fname']?> <?php echo $row['lname']?></strong>
 											</div>
 											<div style="padding:10px 0 0 15px">
-												<span class="badge badge-primary"><?php echo $row['designation'];?></span>
+												<span class="badge badge-primary"><?php echo $designation_name;?></span>
 											</div>
 										</div>
 										<!-- <div class="text-dark pb-3"><strong style="font-size:30px"><?php echo $row['fname']?><?php echo $row['lname']?></strong>  <span class="badge badge-primary"><?php echo $row['designation'];?></span></div> -->
@@ -161,10 +185,6 @@ if(isset($_SESSION['id'])){
 														<td><?php echo $row['pemail'];?></td>
 													</tr>
 													<tr>
-														<th>Skype</th>
-														<td><?php echo $row['skype'];?></td>
-													</tr>
-													<tr>
 														<th>Pan Card Number</th>
 														<td><?php echo $row['pan_card_no'];?></td>
 													</tr>
@@ -172,14 +192,7 @@ if(isset($_SESSION['id'])){
 														<th>Primary Phone Number</th>
 														<td><?php echo $row['pphno'];?></td>
 													</tr>
-													<tr>
-														<th>Secondary Phone Number</th>
-														<td><?php echo $row['sphno'];?></td>
-													</tr>
-													<tr>
-														<th>Whatsapp Number</th>
-														<td><?php echo $row['wphno'];?></td>
-													</tr>
+													
 													<tr>
 														<th>Gender</th>
 														<td><?php echo $row['gender'];?></td>

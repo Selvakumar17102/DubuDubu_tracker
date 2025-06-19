@@ -17,7 +17,7 @@ if (isset($_POST['company_id']) && isset($_POST['short_name'])) {
         $next_id_number = 1;
     }
 
-    $new_emp_id = $short_name . " " . str_pad($next_id_number, 4, '0', STR_PAD_LEFT);
+    $new_emp_id = $short_name.str_pad($next_id_number, 4, '0', STR_PAD_LEFT);
 
     echo $new_emp_id;
 }

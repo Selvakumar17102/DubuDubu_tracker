@@ -200,9 +200,8 @@ if(isset($_POST['submit'])){
     $branch_name = $_POST['branch_name'];
     $account_type = $_POST['account_type'];
 
-
     $sql = "SELECT * FROM employee WHERE oemail = '$oemail'";
-    $result=$conn->query($sql);
+    $result=$conn->query($sql);    
 
     $ran_id = rand(time(), 100000000);
     $online_status = "Active now";
@@ -214,7 +213,7 @@ if(isset($_POST['submit'])){
             header('location:user-list.php?msg=Employee Updated!&type=warning');
         }
     }else{
-        if($result->num_rows < 0){
+        if($result->num_rows == 0){
 		    $sql = "INSERT INTO employee (emp_id, fname, lname, pphno, pemail, gender, dob, marital, blood_group, aadharcardno, pan_card_no, caddress, paddress, rname, relationship, contactnumber, company, doj, oemail, department, designation, emp_roll, emp_report_to, emp_type, basic_salary, emp_photo, aadhar, pan, experience, reliving, payslip, resume, degreecertificate, system_type, spare, system_id, username, password, control, emp_status, disability, disability_id, bank_name, account_number,ifsc_code, branch_name, account_type, referral, refEmployee, bonusAmount, unique_id, online_status)VALUES('$employee_id','$fname','$lname','$pphone','$pemail','$gender','$birthday','$marital','$blood','$aadharcardno','$pancard','$caddress','$paddress','$rname','$relationship','$contactnumber','$company','$joinday','$oemail','$department','$designation','$roll','$report','$employeetype','$salary','$images','$aadhar1','$pan1','$experience1','$relieving1','$payslip1','$resume1','$degree1','$systemtype','$sparegadgets','$systemid','$oemail','$employee_id','$emp_control','Active','$disability','$disability_id','$bank_name','$account_number','$ifsc_code','$branch_name','$account_type','$referral','$refEmployee','$bonusAmount','$ran_id','$online_status')";
             // echo $sql;exit();
 		    $result=$conn->query($sql);

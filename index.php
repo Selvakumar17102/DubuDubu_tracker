@@ -30,6 +30,28 @@
 		<link href="assets/img/favicon.png" rel="shortcut icon" />
 	</head>
 	<style>
+	
+	    body {
+          background: #f8f9fa;
+        }
+        
+        .card {
+          border: none;
+          border-radius: 12px;
+        }
+        
+        input.form-control {
+          border-radius: 10px;
+          padding: 10px 15px;
+        }
+        
+        .btn-primary {
+          border-radius: 10px;
+          font-weight: bold;
+          background-color: #007bff;
+          border-color: #007bff;
+        }
+
 		.sign-inup .ec-brand a img {
     		width: 400px;
     		max-width: 1200px;
@@ -37,61 +59,38 @@
 	</style>
 	
 	<body class="sign-inup" id="body">
-		<div class="container d-flex align-items-center justify-content-center form-height-login pt-24px pb-24px">
-			<div class="row justify-content-center">
-				<div class="col-lg-9 col-md-10">
-					<div class="card">
-						<div class="card-header">
-							<div class="ec-brand">
-								<a href="index.php" title="Dubu Dubu">
-									<img class="ec-brand-icon" src="assets/img/logo/signin.png" alt="" />
-								</a>
-							</div>
-						</div>
-						<div class="card-body p-5">
-							<!-- <h3 class="text-dark mb-5" style="font-family: math;">EMPLOYEE PORTAL</h3> -->
-							<h2 class="text-dark mb-5" style="font-family: math;">LOG IN</h2>
+		<div class="container-fluid vh-100 d-flex align-items-center justify-content-center">
+          <div class="row w-100 shadow rounded overflow-hidden" style="max-width: 1000px;">
+            
+            <!-- LEFT SIDE - LOGO -->
+            <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center bg-warning">
+              <img src="assets/img/logo/signin.png" alt="Office Logo" class="img-fluid p-4" style="max-height: 300px;">
+            </div>
+        
+            <!-- RIGHT SIDE - LOGIN FORM -->
+            <div class="col-md-6 bg-white p-5">
+              <div class="text-center mb-4">
+                <img src="assets/img/logo/signin.png" alt="Signin Logo" class="mb-3" style="max-height: 60px;">
+                <h2 class="text-dark" style="font-family: math;">LOG IN</h2>
+              </div>
+              
+              <div class="validform mb-3"></div>
+              <form method="post">
+                <div class="form-group mb-3">
+                  <input type="name" class="form-control" name="name" id="name" placeholder="Username">
+                </div>
+                <div class="form-group mb-4 position-relative">
+                  <input type="password" class="form-control" name="pass" id="pass" placeholder="Password">
+                  <i class="far fa-eye position-absolute" id="togglePassword" style="top: 12px; right: 10px; cursor: pointer;"></i>
+                </div>
+        
+                <button type="button" name="signin" id="signin" class="btn btn-warning w-100 mb-3">Sign In</button>
+              </form>
+            </div>
+        
+          </div>
+        </div>
 
-							<div class="validform mb-3"></div>
-
-							<div>
-								<form method="post">
-									<div class="row">
-										<div class="form-group col-md-12 mb-4">
-											<input type="name" class="form-control" name="name" id="name" placeholder="Username">
-										</div>
-									
-										<div class="form-group col-md-12 ">
-											<input type="password" class="form-control" name="pass" id="pass" placeholder="Password">
-											<i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
-										</div>
-									
-										<div class="col-md-12">
-											<div class="d-flex my-2 justify-content-between">
-												<div class="d-inline-block mr-3">
-													<!-- <div class="control control-checkbox">Remember me
-														<input type="checkbox" />
-														<div class="control-indicator"></div>
-													</div> -->
-												</div>
-											
-											<!-- <p><a class="text-blue" href="#">Forgot Password?</a></p> -->
-											</div>
-										
-											<button type="button" name="signin" id="signin" class="btn btn-primary btn-block mb-4">Sign In</button>
-										
-										<!-- <p class="sign-upp">Don't have an account yet ?
-											<a class="text-blue" href="sign-up.php">Sign Up</a>
-										</p> -->
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 	
 		<!-- Javascript -->
 		

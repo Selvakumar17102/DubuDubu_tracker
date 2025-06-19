@@ -12,7 +12,8 @@ $dash_apply = 'active';
 $today = date('Y-m-d');
 $today1 = date('d-m-Y');
 
-$employee_sql1 = "SELECT * FROM employee WHERE del_status = 0 AND doj <= '$today' AND control != 5 AND emp_status = 'Active'";
+// $employee_sql1 = "SELECT * FROM employee WHERE del_status = 0 AND doj <= '$today' AND control != 5 AND emp_status = 'Active'";
+$employee_sql1 = "SELECT * FROM employee WHERE emp_status = 'Active'";
 $employee_result1 = $conn->query($employee_sql1);
 $count = $employee_result1->num_rows;
 
@@ -66,7 +67,6 @@ $count = $employee_result1->num_rows;
 			<!-- CONTENT WRAPPER -->
 			<div class="ec-content-wrapper">
 				<div class="content">
-					<!-- Employee -->
 					<div class="row">
 						<div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
 							<div class="card card-mini dash-card card-1">
@@ -77,47 +77,75 @@ $count = $employee_result1->num_rows;
 								</div>
 							</div>
 						</div>
+						<div class="col-xl-9 col-sm-6 p-b-15 lbl-card">
+							<div class="card card-mini dash-card card-1">
+								<div class="card-body new-class">
+									<h5 class="mb-3">📢 Announcement</h5>
+									<form id="announcement_form" class="d-flex align-items-center">
+										<input type="text" class="form-control me-2" id="announcement_text" name="announcement_text" placeholder="Type your announcement here..." required>
+										<button type="submit" class="btn btn-primary">Send</button>
+									</form>
 
-						<?php
-						$count_sql = "SELECT COUNT(location) AS locationcount, location FROM employee
-						WHERE del_status = 0 AND doj <= '$today' AND control != 5 AND emp_status = 'Active' GROUP BY location";
-						$count_result = $conn->query($count_sql);
-						while($count_row = mysqli_fetch_array($count_result)){
-						?>
-							<div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
-								<div class="card card-mini dash-card card-2">
-									<div class="card-body new-class">
-										<h2 class="mb-1"><?php echo $count_row['locationcount']; ?></h2>
-										<p><?php echo $count_row['location']; ?></p>
-										<span class="mdi mdi-account-multiple"></span>
+									<div class="mt-2">
+										<h6>Recent Announcements:</h6>
+										<ul id="announcement_list" class="list-group"></ul>
 									</div>
 								</div>
 							</div>
-						<?php
-						}
-						?>
-						<!-- <div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
-							<div class="card card-mini dash-card card-3">
-								<div class="card-body">
-									<h2 class="mb-1">15,503</h2>
-									<p>Daily Order</p>
-									<span class="mdi mdi-package-variant"></span>
-								</div>
-							</div>
 						</div>
-						<div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
-							<div class="card card-mini dash-card card-4">
-								<div class="card-body">
-									<h2 class="mb-1">$98,503</h2>
-									<p>Daily Revenue</p>
-									<span class="mdi mdi-currency-usd"></span>
-								</div>
-							</div>
-						</div> -->
 					</div>
 
 					<!-- Attendance Table -->
 					<div class="row">
+
+						<div class="col-xl-5 col-md-12 p-b-15">
+							<!-- Total Report -->
+							<div id="user-acquisition" class="card card-default">
+								<div class="card-header">
+									<h2>Attendance - <?php echo $today1; ?></h2>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table id="responsive-data-table" class="table" style="width:100%">
+											<tbody>
+												<?php
+												$sql1 = "SELECT COUNT(CASE WHEN a.status = 0 THEN 1 END) AS present,
+												COUNT(CASE WHEN a.status = 1 THEN 1 END) AS absent,
+												COUNT(CASE WHEN count = 1 && a.status = 1 THEN 1 END) AS fullday,
+												COUNT(CASE WHEN count = 2 THEN 1 END) AS halfday FROM attendance a
+												LEFT OUTER JOIN employee b ON b.id = a.emp_id WHERE a.date='$today' AND b.emp_status = 'Active';";
+												$result1 = $conn->query($sql1);
+												// if($result->num_rows > 0){
+												while($row1 = mysqli_fetch_array($result1)){
+												?>
+													<tr>
+														<td colspan="2">Total Employees <h3 style="display: contents"><span class="badge bg-primary float-end"><?php echo $count; ?></span></h3></td>
+													</tr>
+													<tr>
+														<td colspan="2">Total Present <h3 style="display: contents"><span class="badge bg-success float-end"><?php echo $row1['present']; ?></span></h3></td>
+													</tr>
+													<tr>
+														<td colspan="2">Total Absent <h3 style="display: contents"><span class="badge bg-failed float-end"><?php echo $row1['absent']; ?></span></h3></td>
+													</tr>
+													<tr>
+														<td>Full Day <h3 style="display: contents"><span class="badge bg-orange float-end" style="background-color: #e45b259e"><?php echo $row1['fullday']; ?></span></h3></td>
+														<td style="color: #56606e; font-weight: 500">Half Day <h3 style="display: contents"><span class="badge bg-warning float-end"><?php echo $row1['halfday']; ?></span></h3></td>
+													</tr>
+												<?php
+													if($row1['present'] == 0 && $row1['fullday'] == 0 && $row1['halfday'] == 0){
+														?>
+														<tr><h3><td colspan="2" style="text-align: center">Today Attendance Not updated</td></h3></tr>
+														<?php
+													}
+												}
+												?>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+
 						<div class="col-xl-7 col-md-12 p-b-15">
 							<!-- Team Report -->
 							<div id="user-acquisition" class="card card-default">
@@ -172,53 +200,7 @@ $count = $employee_result1->num_rows;
 							</div>
 						</div>
 
-						<div class="col-xl-5 col-md-12 p-b-15">
-							<!-- Total Report -->
-							<div id="user-acquisition" class="card card-default">
-								<div class="card-header">
-									<h2>Attendance - <?php echo $today1; ?></h2>
-								</div>
-								<div class="card-body">
-									<div class="table-responsive">
-										<table id="responsive-data-table" class="table" style="width:100%">
-											<tbody>
-												<?php
-												$sql1 = "SELECT COUNT(CASE WHEN a.status = 0 THEN 1 END) AS present,
-												COUNT(CASE WHEN a.status = 1 THEN 1 END) AS absent,
-												COUNT(CASE WHEN count = 1 && a.status = 1 THEN 1 END) AS fullday,
-												COUNT(CASE WHEN count = 2 THEN 1 END) AS halfday FROM attendance a
-												LEFT OUTER JOIN employee b ON b.id = a.emp_id WHERE a.date='$today' AND b.emp_status = 'Active';";
-												$result1 = $conn->query($sql1);
-												// if($result->num_rows > 0){
-												while($row1 = mysqli_fetch_array($result1)){
-												?>
-													<tr>
-														<td colspan="2">Total Employees <h3 style="display: contents"><span class="badge bg-primary float-end"><?php echo $count; ?></span></h3></td>
-													</tr>
-													<tr>
-														<td colspan="2">Total Present <h3 style="display: contents"><span class="badge bg-success float-end"><?php echo $row1['present']; ?></span></h3></td>
-													</tr>
-													<tr>
-														<td colspan="2">Total Absent <h3 style="display: contents"><span class="badge bg-failed float-end"><?php echo $row1['absent']; ?></span></h3></td>
-													</tr>
-													<tr>
-														<td>Full Day <h3 style="display: contents"><span class="badge bg-orange float-end" style="background-color: #e45b259e"><?php echo $row1['fullday']; ?></span></h3></td>
-														<td style="color: #56606e; font-weight: 500">Half Day <h3 style="display: contents"><span class="badge bg-warning float-end"><?php echo $row1['halfday']; ?></span></h3></td>
-													</tr>
-												<?php
-													if($row1['present'] == 0 && $row1['fullday'] == 0 && $row1['halfday'] == 0){
-														?>
-														<tr><h3><td colspan="2" style="text-align: center">Today Attendance Not updated</td></h3></tr>
-														<?php
-													}
-												}
-												?>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
+						
 					</div>
 
 					<!-- Leave Details -->
@@ -306,339 +288,58 @@ $count = $employee_result1->num_rows;
 													</div>
 												</div>
 											</div>
+										</div>
 									</div>
-									<!-- <div class="col-xl-6 col-md-12 p-b-15">
-										<h4 style="text-align: center">Uninformed</h4>
-											<div class="row">
-												<div class="col-6">
-													<div class="table-responsive">
-														<table id="responsive-data-table" class="table" style="width:100%">
-															<thead>
-																<tr>
-																	<th colspan="2" style="text-align: center">Full Day</th>
-																</tr>
-															</thead>
-															<tbody>
-																<?php
-																$attend_sql2 = "SELECT * FROM attendance a
-																LEFT OUTER JOIN employee b ON a.emp_id=b.id WHERE a.date='$today' AND a.status=1 AND a.inform_status=2 AND a.count=1";
-																$attend_result2 = $conn->query($attend_sql2);
-																$a = 1;
-																while($attend_row2 = mysqli_fetch_array($attend_result2)){
-																?>
-																	<tr>
-																		<td><?php echo $a++; ?></td>
-																		<td><?php echo $attend_row2['fname'];?>&nbsp;<?php echo $attend_row2['lname'];?></td>
-																	</tr>
-																<?php
-																	}
-																?>
-															</tbody>
-														</table>
-													</div>
-												</div>
-												<div class="col-6">
-													<div class="table-responsive">
-														<table id="responsive-data-table" class="table" style="width:100%">
-															<thead>
-																<tr>
-																	<th colspan="2" style="text-align: center">Half Day</th>
-																</tr>
-															</thead>
-															<tbody>
-																<?php
-																$attend_sql3 = "SELECT * FROM attendance a
-																LEFT OUTER JOIN employee b ON a.emp_id=b.id WHERE a.date='$today' AND a.status=1 AND a.inform_status=2 AND a.count=2";
-																$attend_result3 = $conn->query($attend_sql3);
-																$a = 1;
-																while($attend_row3 = mysqli_fetch_array($attend_result3)){
-																?>
-																	<tr>
-																		<td><?php echo $a++; ?></td>
-																		<td><?php echo $attend_row3['fname'];?>&nbsp;<?php echo $attend_row3['lname'];?></td>
-																	</tr>
-																<?php
-																	}
-																?>
-															</tbody>
-														</table>
-													</div>
-												</div>
-											</div>
-									</div> -->
 								</div>
 							</div>
-						</div>
 						</div>
 						<div class="col-xl-5 col-md-12 p-b-15">
-						<div id="user-acquisition" class="card card-default">
-							<div class="card-header">
-								<h2 style="text-align: center">New Joinees</h2>
-							</div>
-							<div class="card-body">
-								<div class="row">
-									<div class="col">
-										<div class="table-responsive">
-											<table id="responsive-data-table" class="table" style="width:100%">
-												<thead>
-													<tr>
-														<th>S.No</th>
-														<th>Name</th>
-														<th>Designation</th>
-														<th>Location</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php
-													$emp_sql = "SELECT * FROM employee WHERE del_status = 0 AND emp_status = 'Active'";
-													$emp_result = $conn->query($emp_sql);
-													$a = 1;
-													while($emp_row = mysqli_fetch_array($emp_result)){
-														$date = $emp_row['doj'];
-														$endDate = date('Y-m-d',strtotime($date. '+7 days'));
-														if(($date <= $today) && ($endDate >= $today)){
-													?>
+							<div id="user-acquisition" class="card card-default">
+								<div class="card-header">
+									<h2 style="text-align: center">New Joinees</h2>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<div class="col">
+											<div class="table-responsive">
+												<table id="responsive-data-table" class="table" style="width:100%">
+													<thead>
 														<tr>
-															<td><?php echo $a++; ?></td>
-															<td><?php echo $emp_row['fname'];?> <?php echo $emp_row['lname'];?></td>
-															<td><?php echo $emp_row['designation'];?></td>
-															<td><?php echo $emp_row['location'];?></td>
+															<th>S.No</th>
+															<th>Name</th>
+															<th>Designation</th>
+															<th>Location</th>
 														</tr>
-													<?php
+													</thead>
+													<tbody>
+														<?php
+														$emp_sql = "SELECT * FROM employee WHERE del_status = 0 AND emp_status = 'Active'";
+														$emp_result = $conn->query($emp_sql);
+														$a = 1;
+														while($emp_row = mysqli_fetch_array($emp_result)){
+															$date = $emp_row['doj'];
+															$endDate = date('Y-m-d',strtotime($date. '+7 days'));
+															if(($date <= $today) && ($endDate >= $today)){
+														?>
+															<tr>
+																<td><?php echo $a++; ?></td>
+																<td><?php echo $emp_row['fname'];?> <?php echo $emp_row['lname'];?></td>
+																<td><?php echo $emp_row['designation'];?></td>
+																<td><?php echo $emp_row['location'];?></td>
+															</tr>
+														<?php
+															}
 														}
-													}
-													?>
-												</tbody>
-											</table>
+														?>
+													</tbody>
+												</table>
+											</div>
 										</div>
 									</div>
-									<!-- <div class="col">
-										<div class="table-responsive">
-											<table id="responsive-data-table" class="table" style="width:100%">
-												<thead>
-													<tr>
-														<th colspan="2" style="text-align: center">Resign</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php
-													$attend_sql = "SELECT * FROM attendance a
-													LEFT OUTER JOIN employee b ON a.emp_id=b.id WHERE a.date='2023-04-11' AND a.status=0 AND a.location=3";
-													$attend_result = $conn->query($attend_sql);
-													$a = 1;
-													while($attend_row = mysqli_fetch_array($attend_result)){
-													?>
-														<tr>
-															<td><?php echo $a++; ?></td>
-															<td><?php echo $attend_row['fname'];?>&nbsp;<?php echo $attend_row['lname'];?></td>
-														</tr>
-													<?php
-													}
-													?>
-												</tbody>
-											</table>
-										</div>
-									</div>
-									<div class="col">
-										<div class="table-responsive">
-											<table id="responsive-data-table" class="table" style="width:100%">
-												<thead>
-													<tr>
-														<th colspan="2" style="text-align: center">Terminate</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php
-													$attend_sql = "SELECT * FROM attendance a
-													LEFT OUTER JOIN employee b ON a.emp_id=b.id WHERE a.date='2023-04-11' AND a.status=0 AND a.location=3";
-													$attend_result = $conn->query($attend_sql);
-													$a = 1;
-													while($attend_row = mysqli_fetch_array($attend_result)){
-													?>
-														<tr>
-															<td><?php echo $a++; ?></td>
-															<td><?php echo $attend_row['fname'];?>&nbsp;<?php echo $attend_row['lname'];?></td>
-														</tr>
-													<?php
-													}
-													?>
-												</tbody>
-											</table>
-										</div>
-									</div> -->
 								</div>
 							</div>
-						</div>
 						</div>
 					</div>
-
-					<!-- OD Details -->
-					<div class="row">
-						<div class="col col-md-12 p-b-15">
-						<div id="user-acquisition" class="card card-default">
-							<div class="card-header">
-								<h2 style="text-align: center">OD Details</h2>
-							</div>
-							<div class="card-body">
-								<div class="row">
-									<div class="col">
-										<div class="table-responsive">
-											<table id="responsive-data-table" class="table" style="width:100%">
-												<thead>
-													<tr>
-														<th colspan="2" style="text-align: center">Client Meet</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php
-													$attend_sql4 = "SELECT * FROM attendance a
-													LEFT OUTER JOIN employee b ON a.emp_id=b.id WHERE a.date='$today' AND a.status=0 AND a.location=2";
-													$attend_result4 = $conn->query($attend_sql4);
-													$a = 1;
-													while($attend_row4 = mysqli_fetch_array($attend_result4)){
-													?>
-														<tr>
-															<td><?php echo $a++; ?></td>
-															<td><?php echo $attend_row4['fname'];?>&nbsp;<?php echo $attend_row4['lname'];?></td>
-														</tr>
-													<?php
-													}
-													?>
-												</tbody>
-											</table>
-										</div>
-									</div>
-									<div class="col">
-										<div class="table-responsive">
-											<table id="responsive-data-table" class="table" style="width:100%">
-												<thead>
-													<tr>
-														<th colspan="2" style="text-align: center">Work From Home</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php
-													$attend_sql5 = "SELECT * FROM attendance a
-													LEFT OUTER JOIN employee b ON a.emp_id=b.id WHERE a.date='$today' AND a.status=0 AND a.location=3";
-													$attend_result5 = $conn->query($attend_sql5);
-													$a = 1;
-													while($attend_row5 = mysqli_fetch_array($attend_result5)){
-													?>
-														<tr>
-															<td><?php echo $a++; ?></td>
-															<td><?php echo $attend_row5['fname'];?>&nbsp;<?php echo $attend_row5['lname'];?></td>
-														</tr>
-													<?php
-													}
-													?>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						</div>
-					</div>
-
-					<!-- Employee Details -->
-					<!-- <div class="row">
-						<div class="col-xl-4 col-md-12 p-b-15">
-						<div id="user-acquisition" class="card card-default">
-							<div class="card-header">
-								<h2 style="text-align: center">Employee Details</h2>
-							</div>
-							<div class="card-body">
-								<div class="row">
-									<div class="col">
-										<div class="table-responsive">
-											<table id="responsive-data-table" class="table" style="width:100%">
-												<thead>
-													<tr>
-														<th colspan="2" style="text-align: center">New Joinee</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php
-													$emp_sql = "SELECT * FROM employee WHERE del_status=0 AND emp_status = 'Active'";
-													$emp_result = $conn->query($emp_sql);
-													$a = 1;
-													while($emp_row = mysqli_fetch_array($emp_result)){
-														$date = $emp_row['doj'];
-														$endDate = date('Y-m-d',strtotime($date. '+7 days'));
-														if(($date <= $today) && ($endDate >= $today)){
-													?>
-														<tr>
-															<td><?php echo $a++; ?></td>
-															<td><?php echo $emp_row['fname'];?> <?php echo $emp_row['lname'];?> <?php echo "- ".$emp_row['designation'];?></td>
-														</tr>
-													<?php
-														}
-													}
-													?>
-												</tbody>
-											</table>
-										</div>
-									</div>
-									<!-- <div class="col">
-										<div class="table-responsive">
-											<table id="responsive-data-table" class="table" style="width:100%">
-												<thead>
-													<tr>
-														<th colspan="2" style="text-align: center">Resign</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php
-													$attend_sql = "SELECT * FROM attendance a
-													LEFT OUTER JOIN employee b ON a.emp_id=b.id WHERE a.date='2023-04-11' AND a.status=0 AND a.location=3";
-													$attend_result = $conn->query($attend_sql);
-													$a = 1;
-													while($attend_row = mysqli_fetch_array($attend_result)){
-													?>
-														<tr>
-															<td><?php echo $a++; ?></td>
-															<td><?php echo $attend_row['fname'];?>&nbsp;<?php echo $attend_row['lname'];?></td>
-														</tr>
-													<?php
-													}
-													?>
-												</tbody>
-											</table>
-										</div>
-									</div>
-									<div class="col">
-										<div class="table-responsive">
-											<table id="responsive-data-table" class="table" style="width:100%">
-												<thead>
-													<tr>
-														<th colspan="2" style="text-align: center">Terminate</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php
-													$attend_sql = "SELECT * FROM attendance a
-													LEFT OUTER JOIN employee b ON a.emp_id=b.id WHERE a.date='2023-04-11' AND a.status=0 AND a.location=3";
-													$attend_result = $conn->query($attend_sql);
-													$a = 1;
-													while($attend_row = mysqli_fetch_array($attend_result)){
-													?>
-														<tr>
-															<td><?php echo $a++; ?></td>
-															<td><?php echo $attend_row['fname'];?>&nbsp;<?php echo $attend_row['lname'];?></td>
-														</tr>
-													<?php
-													}
-													?>
-												</tbody>
-											</table>
-										</div>
-									</div> -->
-								</div>
-							</div>
-						</div>
-						</div>
-					</div> -->
 				</div> <!-- End Content -->
 			</div> <!-- End Content Wrapper -->
 
@@ -674,6 +375,42 @@ $count = $employee_result1->num_rows;
 	<!-- ekka Custom -->
 	<script src="assets/js/ekka.js"></script>
 	<script src="assets/js/manual.js"></script>
+
+	<script>
+		// Submit announcement
+		$("#announcement_form").on("submit", function (e) {
+			e.preventDefault();
+
+			const message = $("#announcement_text").val().trim();
+			if (message === "") return;
+
+			$.post("ajax/save_announcement.php", { message }, function (response) {
+				if (response.status === "success") {
+					alert("Announcement sent!");
+					$("#announcement_text").val("");
+					loadAnnouncements(); // Refresh list
+				} else {
+					alert("Error: " + response.message);
+				}
+			}, "json");
+		});
+
+		// Load announcements
+		function loadAnnouncements() {
+			$.get("ajax/fetch_announcements.php", function (data) {
+				$("#announcement_list").html("");
+				data.forEach(item => {
+					$("#announcement_list").append(
+						`<li class="list-group-item">${item.message} <small class="text-muted float-right">${item.created_at}</small></li>`
+					);
+				});
+			}, "json");
+		}
+
+		// Initial load
+		loadAnnouncements();
+
+	</script>
 </body>
 
 </html>

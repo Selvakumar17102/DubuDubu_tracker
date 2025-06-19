@@ -577,9 +577,17 @@ function format_minutes($minutes) {
 
         setInterval(updateTime, 1000); 
     </script>
+	<script>
+		setTimeout(function () {
+			location.reload();
+		}, 20000);
+	</script>
 
 	<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-	<script>
+
+
+
+	<!-- <script>
 	$(document).ready(function () {
 		$("#punch_in_btn").click(function () {
 
@@ -653,7 +661,118 @@ function format_minutes($minutes) {
 			});
 		});
 	});
-	</script>
+	</script> -->
+
+
+<script>
+$(document).ready(function () {
+	// Check current attendance status on page load
+	$.ajax({
+		url: "ajax/attendance.php",
+		type: "POST",
+		data: { action: "check_status" },
+		dataType: "json",
+		success: function (response) {
+			if (response.status === "punched_out" || response.status === "not_punched_in") {
+				$("#punch_in_btn").show();
+				$("#break_btn").hide();
+				$("#resume_btn").hide();
+				$("#punch_out_btn").hide();
+			} else if (response.status === "punched_in") {
+				$("#punch_in_time").text("Punch In At: " + response.punch_in_time);
+				$("#punch_in_btn").hide();
+				$("#punch_out_btn").show();
+
+				// Check if on break
+				if (response.on_break) {
+					$("#break_btn").hide();
+					$("#resume_btn").show();
+				} else {
+					$("#break_btn").show();
+					$("#resume_btn").hide();
+				}
+			}
+		}
+	});
+
+	// Punch In
+	$("#punch_in_btn").click(function () {
+		$.ajax({
+			url: "ajax/attendance.php",
+			type: "POST",
+			data: { action: "punch_in" },
+			dataType: "json",
+			success: function (response) {
+				if (response.status === "success") {
+					$("#punch_in_time").text("Punch In At: " + response.punch_in_time);
+					$("#punch_in_btn").hide();
+					$("#break_btn").show();
+					$("#punch_out_btn").show();
+				} else {
+					alert("You have already punched in today.");
+				}
+			}
+		});
+	});
+
+	// Start Break
+	$("#break_btn").click(function () {
+		$.ajax({
+			url: "ajax/attendance.php",
+			type: "POST",
+			data: { action: "break" },
+			dataType: "json",
+			success: function (response) {
+				if (response.status === "success") {
+					$("#punch_in_time").text("Break started at: " + response.break_time);
+					alert("Break started at: " + response.break_time);
+					$("#break_btn").hide();
+					$("#resume_btn").show();
+				}
+			}
+		});
+	});
+
+	// Resume Work
+	$("#resume_btn").click(function () {
+		$.ajax({
+			url: "ajax/attendance.php",
+			type: "POST",
+			data: { action: "resume" },
+			dataType: "json",
+			success: function (response) {
+				if (response.status === "success") {
+					$("#punch_in_time").text("Resumed work at: " + response.break_end_time);
+					alert("Resumed work at: " + response.break_end_time);
+					$("#resume_btn").hide();
+					$("#break_btn").show();
+				}
+			}
+		});
+	});
+
+	// Punch Out
+	$("#punch_out_btn").click(function () {
+		$.ajax({
+			url: "ajax/attendance.php",
+			type: "POST",
+			data: { action: "punch_out" },
+			dataType: "json",
+			success: function (response) {
+				if (response.status === "success") {
+					$("#punch_in_time").text("Punched out at: " + response.punch_out_time);
+					alert("Punched out at: " + response.punch_out_time);
+					$("#break_btn, #resume_btn, #punch_out_btn").hide();
+					$("#punch_in_btn").show();
+				}
+			}
+		});
+	});
+});
+</script>
+
+
+
 </body>
 
 </html>

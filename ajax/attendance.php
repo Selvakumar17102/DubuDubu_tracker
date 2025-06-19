@@ -9,6 +9,34 @@ $date = date("Y-m-d");
 
 $action = $_POST['action'];
 
+
+if ($action == "check_status") {
+    $result = $conn->query("SELECT punch_in_time, punch_out_time, break_times FROM attendance_records WHERE employee_id='$employee_id' AND date='$date'");
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        
+        if (!empty($row['punch_out_time'])) {
+            echo json_encode(["status" => "punched_out"]);
+        } else {
+            $on_break = false;
+            $break_times = json_decode($row['break_times'], true);
+            if ($break_times && end($break_times)['end'] === null) {
+                $on_break = true;
+            }
+
+            echo json_encode([
+                "status" => "punched_in",
+                "punch_in_time" => $row['punch_in_time'],
+                "on_break" => $on_break
+            ]);
+        }
+    } else {
+        echo json_encode(["status" => "not_punched_in"]);
+    }
+    exit;
+}
+
+
 if ($action == "punch_in") {
     $punch_in_time = date("H:i:s");
 
@@ -63,6 +91,27 @@ if ($_POST['action'] == "resume") {
     }
 }
 
+if ($action == "punch_out") {
+    $punch_out_time = date("H:i:s");
+    $conn->query("UPDATE attendance_records SET punch_out_time = '$punch_out_time' WHERE employee_id = '$employee_id' AND date = '$date'");
+    echo json_encode(["status" => "success", "punch_out_time" => $punch_out_time]);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // if ($action == "break") {
 //     $break_time = date("H:i:s");
 //     $conn->query("UPDATE attendance SET break_start = '$break_time' WHERE employee_id = $employee_id AND date = '$date'");
@@ -75,11 +124,6 @@ if ($_POST['action'] == "resume") {
 //     echo json_encode(["status" => "success", "resume_time" => $resume_time]);
 // }
 
-if ($action == "punch_out") {
-    $punch_out_time = date("H:i:s");
-    $conn->query("UPDATE attendance_records SET punch_out_time = '$punch_out_time' WHERE employee_id = '$employee_id' AND date = '$date'");
-    echo json_encode(["status" => "success", "punch_out_time" => $punch_out_time]);
-}
 
 
 // if ($_POST['action'] == 'punch_in') {

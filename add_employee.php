@@ -381,7 +381,7 @@ $alldataResult = $conn->query($alldataSql);
 													$rep = $row['emp_report_to'];
 													$arr_rep = (explode(",",$rep));
 													?>
-											    	<select name="report[]" id="report" class="selectpicker" multiple data-live-search="true" required>
+											    	<select name="report[]" id="report" class="selectpicker" multiple data-live-search="true" >
 														<?php
 														while($alldata = mysqli_fetch_array($alldataResult)){
 															?>
