@@ -47,7 +47,7 @@ if(isset($_POST['addTask'])){
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description" content="ekka - Admin Dashboard HTML Template.">
 
-	<title>DUBU DUBU - Add Task</title>
+	<title>DD - Add Task</title>
 
 	<!-- GOOGLE FONTS -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">

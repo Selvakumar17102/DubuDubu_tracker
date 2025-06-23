@@ -82,7 +82,7 @@ $projectBoolean = 'true';
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description" content="Ekka - Admin Dashboard HTML Template.">
 
-	<title>Dubu Dubu - Project</title>
+	<title>DD - Project</title>
 
 	<!-- GOOGLE FONTS -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">

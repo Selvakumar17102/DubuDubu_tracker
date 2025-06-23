@@ -14,7 +14,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content="ekka - Admin Dashboard HTML Template.">
 
-		<title>DUBU DUBU - Sign-in page</title>
+		<title>DD - Sign-in page</title>
 		
 		<!-- GOOGLE FONTS -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,13 +64,13 @@
             
             <!-- LEFT SIDE - LOGO -->
             <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center bg-warning">
-              <img src="assets/img/logo/signin.png" alt="Office Logo" class="img-fluid p-4" style="max-height: 300px;">
+              <img src="assets/img/logo/DDLOGO.png" alt="Office Logo" class="img-fluid p-4" style="max-height: 300px;">
             </div>
         
             <!-- RIGHT SIDE - LOGIN FORM -->
             <div class="col-md-6 bg-white p-5">
-              <div class="text-center mb-4">
-                <img src="assets/img/logo/signin.png" alt="Signin Logo" class="mb-3" style="max-height: 60px;">
+              <div class="text-center">
+                <img src="assets/img/logo/DDTechnologiesLogo.png" alt="Signin Logo" width="250" height="100">
                 <h2 class="text-dark" style="font-family: math;">LOG IN</h2>
               </div>
               

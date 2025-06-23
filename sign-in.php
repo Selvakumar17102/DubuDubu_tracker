@@ -18,7 +18,7 @@ if(isset($_SESSION['id'])){
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content="ekka - Admin Dashboard HTML Template.">
 
-		<title>DUBU DUBU - Sign-in</title>
+		<title>DD - Sign-in</title>
 		
 		<!-- GOOGLE FONTS -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">

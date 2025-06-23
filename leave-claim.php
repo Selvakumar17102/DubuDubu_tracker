@@ -148,7 +148,7 @@ if(isset($_POST['delete_leave_claim'])){
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description" content="Ekka - Admin Dashboard HTML Template.">
 
-	<title>DUBU DUBU - Leave Claim</title>
+	<title>DD - Leave Claim</title>
 
 	<!-- GOOGLE FONTS -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">

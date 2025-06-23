@@ -57,7 +57,7 @@ if(isset($_POST['delete'])){
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description" content="Ekka - Admin Dashboard HTML Template.">
 
-	<title>Dubu Dubu - Holidays</title>
+	<title>DD - Holidays</title>
 
 	<!-- GOOGLE FONTS -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -111,9 +111,15 @@ if(isset($_POST['delete'])){
 							<p class="breadcrumbs"><span><a href="index.php">Home</a></span>
 								<span><i class="mdi mdi-chevron-right"></i></span>Holidays</p>
 						</div>
-						<div  class="col-sm-10" style="text-align:end">
-                    	    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="addHoliday()">Add Holiday</button>
-                    	</div>
+						<?php
+						if($control == 5 && $control == 4){
+							?>
+							<div  class="col-sm-10" style="text-align:end">
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="addHoliday()">Add Holiday</button>
+							</div>
+							<?php
+						}
+						?>
 					</div>
 					<?php
 					if($_GET['type'] == 'success'){

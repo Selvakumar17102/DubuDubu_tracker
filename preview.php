@@ -217,7 +217,7 @@ $today = date('Y-m-d');
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description" content="Ekka - Admin Dashboard HTML Template.">
 
-	<title>DUBU DUBU - Payslip</title>
+	<title>DD - Payslip</title>
     <style>
         @media print {
             body {

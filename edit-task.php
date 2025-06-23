@@ -34,7 +34,7 @@ if(isset($_POST['saveTask'])){
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description" content="ekka - Admin Dashboard HTML Template.">
 
-	<title>DUBU DUBU - Edit Task</title>
+	<title>DD - Edit Task</title>
 
 	<!-- GOOGLE FONTS -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">

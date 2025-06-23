@@ -14,14 +14,15 @@ include("include/connection.php");
 	<div id="sidebar" class="sidebar ec-sidebar-footer">
 		<div class="ec-brand">
 			<a href="profile_dashboard.php" title="DubuDubu">
-				<!-- <img class="ec-brand-icon" src="assets/img/logo/favicon.png" alt="" />&nbsp;&nbsp; -->
-				<span class="ec-brand-name text-truncate">DUBU DUBU</span>
+				<img class="ec-brand-icon" src="assets/img/logo/DDLOGO.png" alt="" style="max-width: 50px !important;">&nbsp;&nbsp;
+				<span class="ec-brand-name text-truncate">DD TECH</span>
 			</a>	
 		</div>
 		<!-- begin sidebar scrollbar -->
 		<div class="ec-navigation" data-simplebar>
 			<!-- sidebar menu -->
 			<ul class="nav sidebar-inner" id="sidebar-menu">
+				<!-- control 1 mean Employee AND control 2 mean TL -->
 				<?php
 					if($control == 1 || $control == 2){
 				?>
@@ -58,7 +59,7 @@ include("include/connection.php");
 										</a>
 									</li>
 									<li class="<?php echo $mess_apply; ?>">
-										<a class="sidenav-item-link" href="message.php">
+										<a class="sidenav-item-link" href="message.php" target="_blank">
 											<span class="nav-text">Chat</span>
 										</a>
 									</li>
@@ -90,7 +91,7 @@ include("include/connection.php");
 											<span class="nav-text">Attendance</span>
 										</a>
 									</li>
-									<li class="<?php echo $leave_apply; ?>">
+									<!-- <li class="<?php echo $leave_apply; ?>">
 										<a class="sidenav-item-link" href="leave-apply.php">
 											<span class="nav-text">Apply Leave</span>
 										</a>
@@ -98,6 +99,38 @@ include("include/connection.php");
 									<li class="<?php echo $permission_apply; ?>">
 										<a class="sidenav-item-link" href="permission-apply.php">
 											<span class="nav-text">Permission</span>
+										</a>
+									</li> -->
+								</ul>
+							</div>
+						</li>
+
+						<!-- Leaves and Loans -->
+						<li class="has-sub <?php echo $leavesLoan; ?>">
+							<?php
+								if($leave_boolean != 'true'){
+									$leave_boolean = 'false';
+								}
+							?>
+							<a class="sidenav-item-link" aria-expanded="<?php echo $leave_boolean; ?>" href="javascript:void(0)">
+								<i class="mdi mdi-book"></i>
+								<span class="nav-text">Leaves & Loans</span> <b class="caret"></b>
+							</a>
+							<div class="collapse <?php echo $leaveLoan_show; ?>">
+								<ul class="sub-menu" id="categorys" data-parent="#sidebar-menu">
+									<li class="<?php echo $leave_apply; ?>">
+										<a class="sidenav-item-link" href="leave-apply.php">
+											<span class="nav-text">Apply Leave</span>
+										</a>
+									</li>
+									<li class="<?php echo $permission_apply; ?>">
+										<a class="sidenav-item-link" href="permission-apply.php">
+											<span class="nav-text">Apply Permission</span>
+										</a>
+									</li>
+									<li class="<?php echo $loan_apply; ?>">
+										<a class="sidenav-item-link" href="loan-apply.php">
+											<span class="nav-text">Apply Loans</span>
 										</a>
 									</li>
 								</ul>
@@ -133,6 +166,7 @@ include("include/connection.php");
 				<?php
 					}else{
 				?>
+						<!-- control 3  Project Manager And control 4 And control 5 Admin -->
 						<!-- profile-Dashboard -->
 						<li class="<?php echo $profiledashboard; ?>">
 							<?php
@@ -171,7 +205,7 @@ include("include/connection.php");
 										</a>
 									</li>
 									<li class="<?php echo $mess_apply; ?>">
-										<a class="sidenav-item-link" href="message.php" >
+										<a class="sidenav-item-link" href="message.php" target="_blank">
 											<span class="nav-text">Chat</span>
 										</a>
 									</li>
@@ -276,6 +310,44 @@ include("include/connection.php");
 											<span class="nav-text">Attendance</span>
 										</a>
 									</li>
+									<!-- <li class="<?php echo $leave_apply; ?>">
+										<a class="sidenav-item-link" href="leave-apply.php">
+											<span class="nav-text">Apply Leave</span>
+										</a>
+									</li> -->
+									<!-- <li class="<?php echo $permission_apply; ?>">
+										<a class="sidenav-item-link" href="permission-apply.php">
+											<span class="nav-text">Permission</span>
+										</a>
+									</li> -->
+									<!-- <li class="<?php echo $leave_details; ?>">
+										<a class="sidenav-item-link" href="leave-details.php">
+											<span class="nav-text">Leave Requests</span>
+										</a>
+									</li> -->
+
+									<!-- <li class="<?php echo $daily_attendance; ?>">
+										<a class="sidenav-item-link" href="attendance.php">
+											<span class="nav-text">Daily Attendance</span>
+										</a>
+									</li> -->
+								</ul>
+							</div>
+						</li>
+
+						<!-- Leaves and Loans -->
+						<li class="has-sub <?php echo $leavesLoan; ?>">
+							<?php
+								if($leave_boolean != 'true'){
+									$leave_boolean = 'false';
+								}
+							?>
+							<a class="sidenav-item-link" aria-expanded="<?php echo $leave_boolean; ?>" href="javascript:void(0)">
+								<i class="mdi mdi-book"></i>
+								<span class="nav-text">Leaves & Loans</span> <b class="caret"></b>
+							</a>
+							<div class="collapse <?php echo $leaveLoan_show; ?>">
+								<ul class="sub-menu" id="categorys" data-parent="#sidebar-menu">
 									<li class="<?php echo $leave_apply; ?>">
 										<a class="sidenav-item-link" href="leave-apply.php">
 											<span class="nav-text">Apply Leave</span>
@@ -283,7 +355,12 @@ include("include/connection.php");
 									</li>
 									<li class="<?php echo $permission_apply; ?>">
 										<a class="sidenav-item-link" href="permission-apply.php">
-											<span class="nav-text">Permission</span>
+											<span class="nav-text">Apply Permission</span>
+										</a>
+									</li>
+									<li class="<?php echo $loan_apply; ?>">
+										<a class="sidenav-item-link" href="loan-apply.php">
+											<span class="nav-text">Apply Loans</span>
 										</a>
 									</li>
 									<li class="<?php echo $leave_details; ?>">
@@ -291,12 +368,11 @@ include("include/connection.php");
 											<span class="nav-text">Leave Requests</span>
 										</a>
 									</li>
-
-									<!-- <li class="<?php echo $daily_attendance; ?>">
-										<a class="sidenav-item-link" href="attendance.php">
-											<span class="nav-text">Daily Attendance</span>
+									<li class="<?php echo $loan_details; ?>">
+										<a class="sidenav-item-link" href="loan-details.php">
+											<span class="nav-text">loan Requests</span>
 										</a>
-									</li> -->
+									</li>
 								</ul>
 							</div>
 						</li>
@@ -377,6 +453,10 @@ include("include/connection.php");
 								</ul>
 							</div>
 						</li>
+
+						<hr>
+						<!-- CRM Title -->
+                        <div style="text-align: center;  font-size: 12px; font-weight: bold;">CRM</div>
 							
 						<!-- Comp-off -->
 						<!-- <li class="<?php echo $comp; ?>">
@@ -405,7 +485,7 @@ include("include/connection.php");
 						</li> -->
 							
 						<!-- Client -->
-						<!-- <li class="<?php echo $client; ?>">
+						<li class="<?php echo $client; ?>">
 							<?php
 								if($clientBoolean != 'true'){
 									$clientBoolean = 'false';
@@ -415,10 +495,10 @@ include("include/connection.php");
 								<i class="mdi  mdi-account-multiple-plus" ></i>
 								<span class="nav-text">client</span>
 							</a>
-						</li> -->
+						</li>
 							
 						<!-- Project -->
-						<!-- <li class="<?php echo $project; ?>">
+						<li class="<?php echo $project; ?>">
 							<?php
 								if($projectBoolean != 'true'){
 									$projectBoolean = 'false';
@@ -428,10 +508,10 @@ include("include/connection.php");
 								<i class="mdi mdi-file-powerpoint-box" ></i>
 								<span class="nav-text">project</span>
 							</a>
-						</li> -->
+						</li>
 							
 						<!-- Task -->
-						<!-- <li class="<?php echo $task; ?>">
+						<li class="<?php echo $task; ?>">
 							<?php
 								if($taskBoolean != 'true'){
 									$taskBoolean = 'false';
@@ -441,10 +521,10 @@ include("include/connection.php");
 								<i class="mdi mdi-clipboard-check-outline"></i>
 								<span class="nav-text">Task</span>
 							</a>
-						</li> -->
+						</li>
 							
 						<!-- Time Sheet -->
-						<!-- <li class="has-sub <?php echo $timeSheet; ?>">
+						<li class="has-sub <?php echo $timeSheet; ?>">
 							<?php
 								if($timeBoolean != 'true'){
 									$timeBoolean = 'false';
@@ -484,7 +564,7 @@ include("include/connection.php");
 									</li>
 								</ul>
 							</div>
-						</li> -->
+						</li>
 									
 						<!-- Invoice Service -->
 						<!-- <li class="<?php echo $invoice_service; ?>">
@@ -563,6 +643,8 @@ include("include/connection.php");
 								<span class="nav-text">Leave Claim</span>
 							</a>
 						</li> -->
+
+						<hr>
 
 						<!-- Reports -->
 						<li class="has-sub <?php echo $report; ?>">

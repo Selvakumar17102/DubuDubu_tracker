@@ -3,9 +3,9 @@
 session_start();
 ini_set('display_errors','off');
 include("include/connection.php");
-$attendance = 'active';
-$atten_boolean = 'true';
-$attendance_show = 'show';
+$leavesLoan = 'active';
+$leave_boolean = 'true';
+$leaveLoan_show = 'show';
 $leave_apply = 'active';
 
 $today = date('Y-m-d');
@@ -84,7 +84,7 @@ $leave_balance = ($total_leaves_this_month < $allowed_leave) ? ($allowed_leave -
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description" content="ekka - Admin Dashboard HTML Template.">
 
-	<title>DUBU DUBU - Leave Apply</title>
+	<title>DD - Leave Apply</title>
 
 	<!-- GOOGLE FONTS -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">

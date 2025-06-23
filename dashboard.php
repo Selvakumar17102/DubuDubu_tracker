@@ -28,7 +28,7 @@ $count = $employee_result1->num_rows;
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description" content="ekka - Admin Dashboard eCommerce HTML Template.">
 
-	<title>DUBU DUBU - Dashboard</title>
+	<title>DD - Dashboard</title>
 
 	<!-- GOOGLE FONTS -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -83,6 +83,9 @@ $count = $employee_result1->num_rows;
 									<h5 class="mb-3">📢 Announcement</h5>
 									<form id="announcement_form" class="d-flex align-items-center">
 										<input type="text" class="form-control me-2" id="announcement_text" name="announcement_text" placeholder="Type your announcement here..." required>
+										<input type="date" class="form-control" id="from_date" name="from_date" required>
+									    <input type="date" class="form-control" id="to_date" name="to_date" required>
+
 										<button type="submit" class="btn btn-primary">Send</button>
 									</form>
 
@@ -378,22 +381,47 @@ $count = $employee_result1->num_rows;
 
 	<script>
 		// Submit announcement
+		// $("#announcement_form").on("submit", function (e) {
+		// 	e.preventDefault();
+
+		// 	const message = $("#announcement_text").val().trim();
+		// 	if (message === "") return;
+
+		// 	$.post("ajax/save_announcement.php", { message }, function (response) {
+		// 		if (response.status === "success") {
+		// 			alert("Announcement sent!");
+		// 			$("#announcement_text").val("");
+		// 			loadAnnouncements(); // Refresh list
+		// 		} else {
+		// 			alert("Error: " + response.message);
+		// 		}
+		// 	}, "json");
+		// });
+
 		$("#announcement_form").on("submit", function (e) {
 			e.preventDefault();
 
 			const message = $("#announcement_text").val().trim();
-			if (message === "") return;
+			const fromDate = $("#from_date").val();
+			const toDate = $("#to_date").val();
 
-			$.post("ajax/save_announcement.php", { message }, function (response) {
+			if (!message || !fromDate || !toDate) return alert("All fields required!");
+
+			$.post("ajax/save_announcement.php", {
+				message,
+				from_date: fromDate,
+				to_date: toDate
+			}, function (response) {
 				if (response.status === "success") {
 					alert("Announcement sent!");
-					$("#announcement_text").val("");
-					loadAnnouncements(); // Refresh list
+					$("#announcement_form")[0].reset();
+					loadAnnouncements(); // Reload
 				} else {
 					alert("Error: " + response.message);
 				}
 			}, "json");
 		});
+
 
 		// Load announcements
 		function loadAnnouncements() {

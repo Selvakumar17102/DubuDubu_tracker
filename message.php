@@ -1,6 +1,6 @@
 <?php
 session_start();
-ini_set("display_errors",'on');
+ini_set("display_errors",'off');
 include("include/connection.php");
 $dashboard = "active";
 $dashboardBoolean = 'true';
@@ -305,7 +305,7 @@ if(mysqli_num_rows($sql) > 0){
                             }else{
                                 ?>
                                 <div class="row g-0 justify-content-center align-items-center h-100">
-                                    <div class="col-md-8 col-sm-10 text-center">
+                                    <div class="col-md-12 col-sm-12 text-center">
                                         <img src="assets_new/images/application/img-empty-mail.png" alt="img" class="img-fluid mb-4" />
                                         <h2><b>There is No Message</b></h2>
                                         <p class="mb-0 text-muted">When You have message that will Display here</p>

@@ -2,9 +2,9 @@
 session_start();
 ini_set('display_errors','off');
 include("include/connection.php");
-$attendance = 'active';
-$atten_boolean = 'true';
-$attendance_show = 'show';
+$leavesLoan = 'active';
+$leave_boolean = 'true';
+$leaveLoan_show = 'show';
 $leave_details = 'active';
 
 $emp_id = $_SESSION['id'];
@@ -42,7 +42,7 @@ if(isset($_POST['save'])){
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description" content="ekka - Admin Dashboard HTML Template.">
 
-	<title>DUBU DUBU - Leave Details</title>
+	<title>DD - Leave Details</title>
 
 	<!-- GOOGLE FONTS -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -103,7 +103,6 @@ if(isset($_POST['save'])){
 												<tr>
 													<th>S.No</th>
 													<th>Name</th>
-													<th>Department</th>
 													<th>Applied Date</th>
 													<th>Type</th>
 													<th>Range</th>
@@ -131,7 +130,6 @@ if(isset($_POST['save'])){
 												<tr>
 													<td><?php echo $s++; ?></td>
 													<td><?php echo $leave_row['fname'];?>&nbsp;<?php echo $leave_row['lname'];?></td>
-													<td><?php echo $leave_row['emp_roll'];?></td>
 													<td><?php echo date("d-m-Y", strtotime($leave_row['applied_date']));?></td>
 													<td><?php echo $leave_row['type'];?></td>
 													<td>

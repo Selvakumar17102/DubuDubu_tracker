@@ -2,9 +2,9 @@
 session_start();
 ini_set('display_errors','off');
 include("include/connection.php");
-$attendance = 'active';
-$atten_boolean = 'true';
-$attendance_show = 'show';
+$leavesLoan = 'active';
+$leave_boolean = 'true';
+$leaveLoan_show = 'show';
 $permission_apply = 'active';
 
 date_default_timezone_set('Asia/Kolkata'); 
@@ -66,7 +66,7 @@ if(isset($_POST["request"])){
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description" content="ekka - Admin Dashboard HTML Template.">
 
-	<title>DUBU DUBU - Permission Apply</title>
+	<title>DD - Permission Apply</title>
 
 	<!-- GOOGLE FONTS -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">

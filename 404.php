@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description" content="ekka - Admin Dashboard HTML Template.">
 
-	<title>ekka - Admin Dashboard HTML Template.</title>
+	<title>DD - 404 page.</title>
 
 	<!-- FAVICON -->
 	<link href="assets/img/favicon.png" rel="shortcut icon" />
@@ -32,14 +32,9 @@
 <body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-dark ec-header-light" id="body">
 	<!-- WRAPPER -->
 	<div class="wrapper">
-		<!-- LEFT MAIN SIDEBAR -->
-		<?php include("include/side-bar.php"); ?>
 
 		<!-- PAGE WRAPPER -->
 		<div class="ec-page-wrapper">
-
-			<!-- Header -->
-			<?php include("include/header.php"); ?>
 
 			<!-- CONTENT WRAPPER -->
 			<div class="ec-content-wrapper">

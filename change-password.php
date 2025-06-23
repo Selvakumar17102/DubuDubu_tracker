@@ -39,7 +39,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content="ekka - Admin Dashboard HTML Template.">
 
-		<title>DUBU DUBU - Password Change page</title>
+		<title>DD - Password Change page</title>
 		
 		<!-- GOOGLE FONTS -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">

@@ -58,7 +58,7 @@ if(isset($_POST['delete'])){
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description" content="Ekka - Admin Dashboard HTML Template.">
 
-	<title>DUBU DUBU - Companies</title>
+	<title>DD - Companies</title>
 
 	<!-- GOOGLE FONTS -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">

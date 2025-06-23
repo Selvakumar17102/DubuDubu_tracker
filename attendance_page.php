@@ -88,9 +88,18 @@ function interval_to_minutes($interval) {
     return ($interval->h * 60) + $interval->i + ($interval->s / 60);
 }
 
+// function minutes_to_interval($minutes) {
+//     return new DateInterval("PT" . floor($minutes) . "M");
+// }
 function minutes_to_interval($minutes) {
-    return new DateInterval("PT" . floor($minutes) . "M");
+    $minutes = round($minutes); // round off float
+    $interval = new DateInterval("PT" . abs($minutes) . "M");
+    if ($minutes < 0) {
+        $interval->invert = 1; // 1 means negative interval
+    }
+    return $interval;
 }
+
 
 function format_interval($interval) {
     return sprintf("%02d hrs %02d min", $interval->h, $interval->i);
@@ -110,7 +119,7 @@ function format_minutes($minutes) {
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description" content="ekka - Admin Dashboard eCommerce HTML Template.">
 
-	<title>DUBU DUBU - Attendance</title>
+	<title>DD - Attendance</title>
 
 	<!-- GOOGLE FONTS -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">

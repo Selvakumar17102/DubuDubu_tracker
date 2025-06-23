@@ -24,7 +24,7 @@ if(isset($_GET['get_id'])){
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description" content="Ekka - Admin Dashboard HTML Template.">
 
-	<title>DUBU DUBU - View Page.</title>
+	<title>DD - View Page.</title>
 
 	<!-- GOOGLE FONTS -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
