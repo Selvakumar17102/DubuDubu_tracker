@@ -126,7 +126,7 @@ else{
 						<div class="col-12">
 							<div class="card card-default">
 								<div class="card-header card-header-border-bottom">
-									<h2 style="text-align: center">DUBU DUBU Payslip Report</h2>
+									<h2 style="text-align: center">DD Payslip Report</h2>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">

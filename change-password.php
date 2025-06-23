@@ -68,7 +68,7 @@
 					<div class="card">
 						<div class="card-header" style="background-image: radial-gradient(white, white, blue);">
 							<div class="ec-brand">
-								<a href="index.php" title="Dubu Dubu">
+								<a href="index.php" title="DD">
 									<img class="ec-brand-icon" src="assets/img/logo/signin.png" alt="" />
 								</a>
 							</div>

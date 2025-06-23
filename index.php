@@ -70,7 +70,7 @@
             <!-- RIGHT SIDE - LOGIN FORM -->
             <div class="col-md-6 bg-white p-5">
               <div class="text-center">
-                <img src="assets/img/logo/DDTechnologiesLogo.png" alt="Signin Logo" width="250" height="100">
+                <img src="assets/img/logo/DDTechnologiesLogo.png" alt="Signin Logo" width="300" height="100">
                 <h2 class="text-dark" style="font-family: math;">LOG IN</h2>
               </div>
               

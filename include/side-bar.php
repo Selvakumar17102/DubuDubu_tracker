@@ -13,9 +13,9 @@ include("include/connection.php");
 <div class="ec-left-sidebar ec-bg-sidebar d-print-none">
 	<div id="sidebar" class="sidebar ec-sidebar-footer">
 		<div class="ec-brand">
-			<a href="profile_dashboard.php" title="DubuDubu">
-				<img class="ec-brand-icon" src="assets/img/logo/DDLOGO.png" alt="" style="max-width: 50px !important;">&nbsp;&nbsp;
-				<span class="ec-brand-name text-truncate">DD TECH</span>
+			<a href="profile_dashboard.php" title="DD">
+				<img class="ec-brand-icon" src="assets/img/logo/DDTechnologiesLogo.png" alt="" style="max-width: 200px !important;">&nbsp;&nbsp;
+				<!-- <span class="ec-brand-name text-truncate">Technologies</span> -->
 			</a>	
 		</div>
 		<!-- begin sidebar scrollbar -->

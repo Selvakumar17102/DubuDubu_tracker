@@ -16,12 +16,12 @@ if(isset($_POST['search'])){
     $status = $_POST['status'];
 	if($_POST['leave_per'] == 1){
     	$leave_per = $_POST['leave_per'];
-		$div_title = "DUBU DUBU Leave Report";
+		$div_title = "DD Leave Report";
 		$title = "Leave Report";
 	}
 	else{
 		$leave_per = $_POST['leave_per'];
-		$div_title = "DUBU DUBU Permission Report";
+		$div_title = "DD Permission Report";
 		$title = "Permission Report";
 	}
 }
@@ -30,11 +30,11 @@ else{
 	$td = $today;
     $status = "";
     if($leave_per = "1"){
-		$div_title = "DUBU DUBU Leave Report";
+		$div_title = "DD Leave Report";
 		$title = "Leave Report";
 	}
 	else{
-		$div_title = "DUBU DUBU Permission Report";
+		$div_title = "DD Permission Report";
 		$title = "Permission Report";
 	}
 }
@@ -59,7 +59,7 @@ else{
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description" content="Ekka - Admin Dashboard HTML Template.">
 
-	<title id="lp_title">DUBU DUBU - <?= $title; ?></title>
+	<title id="lp_title">DD - <?= $title; ?></title>
 
 	<!-- GOOGLE FONTS -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">

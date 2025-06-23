@@ -153,7 +153,7 @@ $count = $employee_result1->num_rows;
 							<!-- Team Report -->
 							<div id="user-acquisition" class="card card-default">
 								<div class="card-header">
-									<h2>DUBU DUBU Team Wise Attendance - <?php echo $today1;?></h2>
+									<h2>DD Team Wise Attendance - <?php echo $today1;?></h2>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
