@@ -181,9 +181,14 @@ if(isset($_POST['submit'])){
     $refEmployee=$_POST['refEmployee'];
     $bonusAmount=$_POST['bonusAmount'];
 
+    // skill
+    $professional_skills = $_POST['professional_skills'];
+    $technical_skills = $_POST['technical_skills'];
+    $language_proficiency = $_POST['language_proficiency'];
+    $certifications = $_POST['certifications'];
+    $additional_notes = $_POST['additional_notes'];
 
     // assets details
-
     $systemtype=$_POST['systemtype'] ?? '';
 	$sparegadgets1=$_POST['sparegadgets'] ?? '';
     if($sparegadgets1){
@@ -207,14 +212,14 @@ if(isset($_POST['submit'])){
     $online_status = "Active now";
     
     if($id > 0 ){
-        $updatesql = "UPDATE employee SET emp_id='$employee_id', fname='$fname', lname='$lname', pemail='$pemail', oemail='$oemail', pphno='$pphone', paddress='$paddress', caddress='$caddress', dob='$birthday', doj='$joinday', blood_group='$blood', aadharcardno='$aadharcardno', designation='$designation', department='$department', basic_salary='$salary', emp_photo='$images', aadhar='$aadhar1', pan='$pan1', experience='$experience1', reliving='$relieving1', payslip='$payslip1', degreecertificate='$degree1', gender='$gender', marital='$marital', emp_roll='$roll', emp_report_to='$report', emp_type='$employeetype', system_type='$systemtype', spare='$sparegadgets', system_id='$systemid', rname='$rname', relationship='$relationship', contactnumber='$contactnumber', company='$company', control='$emp_control', username='$oemail',password='$employee_id', resume='$resume1', pan_card_no='$pancard', disability='$disability', disability_id='$disability_id',bank_name='$bank_name', account_number='$account_number', ifsc_code='$ifsc_code', branch_name='$branch_name', account_type='$account_type',referral='$referral',refEmployee='$refEmployee',bonusAmount='$bonusAmount' WHERE id=$id";
+        $updatesql = "UPDATE employee SET emp_id='$employee_id', fname='$fname', lname='$lname', pemail='$pemail', oemail='$oemail', pphno='$pphone', paddress='$paddress', caddress='$caddress', dob='$birthday', doj='$joinday', blood_group='$blood', aadharcardno='$aadharcardno', designation='$designation', department='$department', basic_salary='$salary', emp_photo='$images', aadhar='$aadhar1', pan='$pan1', experience='$experience1', reliving='$relieving1', payslip='$payslip1', degreecertificate='$degree1', gender='$gender', marital='$marital', emp_roll='$roll', emp_report_to='$report', emp_type='$employeetype', system_type='$systemtype', spare='$sparegadgets', system_id='$systemid', rname='$rname', relationship='$relationship', contactnumber='$contactnumber', company='$company', control='$emp_control', username='$oemail',password='$employee_id', resume='$resume1', pan_card_no='$pancard', disability='$disability', disability_id='$disability_id',bank_name='$bank_name', account_number='$account_number', ifsc_code='$ifsc_code', branch_name='$branch_name', account_type='$account_type',referral='$referral',refEmployee='$refEmployee',bonusAmount='$bonusAmount',professional_skills = '$professional_skills',technical_skills = '$technical_skills',language_proficiency = '$language_proficiency',certifications = '$certifications'additional_notes = '$additional_notes' WHERE id=$id";
         $updateresult=$conn->query($updatesql);
         if($updateresult == TRUE){
             header('location:user-list.php?msg=Employee Updated!&type=warning');
         }
     }else{
         if($result->num_rows == 0){
-		    $sql = "INSERT INTO employee (emp_id, fname, lname, pphno, pemail, gender, dob, marital, blood_group, aadharcardno, pan_card_no, caddress, paddress, rname, relationship, contactnumber, company, doj, oemail, department, designation, emp_roll, emp_report_to, emp_type, basic_salary, emp_photo, aadhar, pan, experience, reliving, payslip, resume, degreecertificate, system_type, spare, system_id, username, password, control, emp_status, disability, disability_id, bank_name, account_number,ifsc_code, branch_name, account_type, referral, refEmployee, bonusAmount, unique_id, online_status)VALUES('$employee_id','$fname','$lname','$pphone','$pemail','$gender','$birthday','$marital','$blood','$aadharcardno','$pancard','$caddress','$paddress','$rname','$relationship','$contactnumber','$company','$joinday','$oemail','$department','$designation','$roll','$report','$employeetype','$salary','$images','$aadhar1','$pan1','$experience1','$relieving1','$payslip1','$resume1','$degree1','$systemtype','$sparegadgets','$systemid','$oemail','$employee_id','$emp_control','Active','$disability','$disability_id','$bank_name','$account_number','$ifsc_code','$branch_name','$account_type','$referral','$refEmployee','$bonusAmount','$ran_id','$online_status')";
+		    $sql = "INSERT INTO employee (emp_id, fname, lname, pphno, pemail, gender, dob, marital, blood_group, aadharcardno, pan_card_no, caddress, paddress, rname, relationship, contactnumber, company, doj, oemail, department, designation, emp_roll, emp_report_to, emp_type, basic_salary, emp_photo, aadhar, pan, experience, reliving, payslip, resume, degreecertificate, system_type, spare, system_id, username, password, control, emp_status, disability, disability_id, bank_name, account_number,ifsc_code, branch_name, account_type, referral, refEmployee, bonusAmount, unique_id, online_status, professional_skills, technical_skills, language_proficiency, certifications, additional_notes)VALUES('$employee_id','$fname','$lname','$pphone','$pemail','$gender','$birthday','$marital','$blood','$aadharcardno','$pancard','$caddress','$paddress','$rname','$relationship','$contactnumber','$company','$joinday','$oemail','$department','$designation','$roll','$report','$employeetype','$salary','$images','$aadhar1','$pan1','$experience1','$relieving1','$payslip1','$resume1','$degree1','$systemtype','$sparegadgets','$systemid','$oemail','$employee_id','$emp_control','Active','$disability','$disability_id','$bank_name','$account_number','$ifsc_code','$branch_name','$account_type','$referral','$refEmployee','$bonusAmount','$ran_id','$online_status','$professional_skills', '$technical_skills', '$language_proficiency', '$certifications', '$additional_notes')";
             // echo $sql;exit();
 		    $result=$conn->query($sql);
             if($result == TRUE){

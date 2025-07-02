@@ -655,8 +655,8 @@ $row1 = $result1->fetch_assoc();
                             $sessionRow = $sessionRes->fetch_assoc();
                             ?>
                             <h6><b><?= $sessionRow['fname'] ?> <?= $sessionRow['lname'] ?></b></h6>
-                            <h5><?= $sessionRow['designation'] ?></h5>
-                            <a href="https://dubudubutechnologies.com">Dubudubutechnologies.com</a></p>
+                            <!-- <h5><?= $sessionRow['designation'] ?></h5> -->
+                            <!-- <a href="https://dubudubutechnologies.com">Dubudubutechnologies.com</a></p> -->
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">

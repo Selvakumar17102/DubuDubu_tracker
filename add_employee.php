@@ -56,9 +56,11 @@ $alldataResult = $conn->query($alldataSql);
 	<!-- FAVICON -->
 	<link href="assets/img/favicon.png" rel="shortcut icon" />
 
-	<!-- Include Bootstrap (if not already included) -->
-<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" />
+<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css">
 
 <!-- Include Select2 CSS & JS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
@@ -74,6 +76,35 @@ $alldataResult = $conn->query($alldataSql);
 	}
 	.tab-link{
 		cursor: not-allowed;
+	}
+
+	.bootstrap-tagsinput {
+		width: 100% !important;
+		min-height: 38px;
+		padding: 0.375rem 0.75rem;
+		font-size: 1rem;
+		background-color: #fff;
+		border: 1px solid #ced4da;
+		border-radius: 0.375rem;
+		line-height: 1.5;
+		display: block;
+	}
+
+	.bootstrap-tagsinput .tag {
+		margin-right: 2px;
+		color: white;
+		background-color: #0d6efd; /* Bootstrap primary */
+		padding: 0.2em 0.5em;
+		border-radius: 0.2rem;
+	}
+
+	.bootstrap-tagsinput .tag [data-role="remove"] {
+		margin-left: 8px;
+		cursor: pointer;
+		color: white;
+	}
+	.bootstrap-tagsinput .tag [data-role="remove"]:hover {
+		color: #ffdddd;
 	}
 </style>
 
@@ -123,11 +154,17 @@ $alldataResult = $conn->query($alldataSql);
 								</li>
 
 								<li class="nav-item">
-									<a  class="nav-link tab-link" id="product-reviews-tab" data-bs-toggle="tab" data-bs-target="#assets" href="#assets" role="tab" aria-selected="false">
+									<a  class="nav-link tab-link" id="product-skill-tab" data-bs-toggle="tab" data-bs-target="#skilset" href="#skilset" role="tab" aria-selected="false">
+										<i class="mdi mdi-certificate mr-1"></i> Skill Set </a>
+								</li>
+
+								<li class="nav-item">
+									<a  class="nav-link tab-link" id="product-asset-tab" data-bs-toggle="tab" data-bs-target="#assets" href="#assets" role="tab" aria-selected="false">
 										<i class="mdi mdi-monitor-multiple mr-1"></i> Assets Management </a>
 								</li>
+
 								<li class="nav-item">
-									<a  class="nav-link tab-link" id="product-reviews-tab" data-bs-toggle="tab" data-bs-target="#bankdetails" href="#bankdetails" role="tab" aria-selected="false">
+									<a  class="nav-link tab-link" id="product-bank-tab" data-bs-toggle="tab" data-bs-target="#bankdetails" href="#bankdetails" role="tab" aria-selected="false">
 										<i class="mdi mdi-bank mr-1"></i> Bank Details </a>
 								</li>
 							</ul>
@@ -690,6 +727,59 @@ $alldataResult = $conn->query($alldataSql);
 										</div>
 									</div>
 
+									<div class="tab-pane pt-3 fade" id="skilset" role="tabpanel">
+										<div class="row mb-2">
+											<div class="col-lg-6">
+												<div class="form-group mb-4">
+													<label for="professional_skills">Professional Skills <span style="color:red;font-weight:bold">*</span></label>
+													<input type="text" class="form-control" data-role="tagsinput" id="professional_skills" name="professional_skills" 
+														value="<?php echo isset($row['professional_skills']) ? $row['professional_skills'] : ''; ?>" 
+														placeholder="E.g., Communication, Leadership, Time Management" required>
+												</div>
+											</div>
+
+											<div class="col-lg-6">
+												<div class="form-group mb-4">
+													<label for="technical_skills">Technical Skills</label>
+													<input type="text" class="form-control" data-role="tagsinput" id="technical_skills" name="technical_skills" 
+														value="<?php echo isset($row['technical_skills']) ? $row['technical_skills'] : ''; ?>" 
+														placeholder="E.g., MS Office, Tally, SAP">
+												</div>
+											</div>
+
+											<div class="col-lg-6">
+												<div class="form-group mb-4">
+													<label for="language_proficiency">Language Proficiency</label>
+													<input type="text" class="form-control" data-role="tagsinput" id="language_proficiency" name="language_proficiency" 
+														value="<?php echo isset($row['language_proficiency']) ? $row['language_proficiency'] : ''; ?>" 
+														placeholder="E.g., English - Fluent, Tamil - Intermediate">
+												</div>
+											</div>
+
+											<div class="col-lg-6">
+												<div class="form-group mb-4">
+													<label for="certifications">Certifications</label>
+													<input type="text" class="form-control" data-role="tagsinput" id="certifications" name="certifications" 
+														value="<?php echo isset($row['certifications']) ? $row['certifications'] : ''; ?>" 
+														placeholder="E.g., First Aid, Excel Advanced, Tally ERP">
+												</div>
+											</div>
+
+											<div class="col-lg-12">
+												<div class="form-group mb-4">
+													<label for="additional_notes">Additional Notes</label>
+													<textarea class="form-control" id="additional_notes" name="additional_notes" rows="3"
+														placeholder="Any additional information..."><?php echo isset($row['additional_notes']) ? $row['additional_notes'] : ''; ?></textarea>
+												</div>
+											</div>
+
+											<div class="modal-footer px-4">
+												<button type="button"  class="btn btn-primary btn-pill btnPrevious">Previous</button>
+												<button type="button" name="skill_submit" id="skill_submit" onclick="skillValidate()" class="btn btn-primary btn-pill btnNext">Next</button>
+											</div>
+										</div>
+									</div>
+
 
 									<div class="tab-pane pt-3 fade" id="assets" role="tabpanel">
 										<div class="row mb-2">
@@ -822,6 +912,9 @@ $alldataResult = $conn->query($alldataSql);
 
 <!-- Initialize Select2 -->
 <script>
+	var input = document.querySelector('#additional_notes');
+  	new Tagify(input);
+
     $(document).ready(function() {
         $('.select2').select2({
             placeholder: "Select an Employee",
@@ -832,11 +925,11 @@ $alldataResult = $conn->query($alldataSql);
 </script>
 
 <script>
-$('.btnPrevious').click(function() {
-  const prevTabLinkEl = $('.nav-tabs .active').closest('li').prev('li').find('a')[0];
-  const prevTab = new bootstrap.Tab(prevTabLinkEl);
-  prevTab.show();
-});
+	$('.btnPrevious').click(function() {
+	const prevTabLinkEl = $('.nav-tabs .active').closest('li').prev('li').find('a')[0];
+	const prevTab = new bootstrap.Tab(prevTabLinkEl);
+	prevTab.show();
+	});
 </script>
 
 
@@ -1147,6 +1240,59 @@ $('.btnPrevious').click(function() {
 			aadharcard.style.border='1px solid green'
 		}
 		if(documentErr == 0){
+			// $('.btnNext').click(function() {
+			  const nextTabLinkEl = $('.nav-alltabs .active').closest('li').next('li').find('a')[0];
+			  const nextTab = new bootstrap.Tab(nextTabLinkEl);
+			  nextTab.show();
+			// });
+		}
+	};
+
+	function skillValidate(){
+		// $('#document_submit').click(function(){
+		var professional_skills = document.getElementById('professional_skills')
+		var technical_skills = document.getElementById('technical_skills')
+		var language_proficiency = document.getElementById('language_proficiency')
+		var certifications = document.getElementById('certifications')
+		var additional_notes = document.getElementById('additional_notes')
+
+		var skillErr = 0;
+		if(professional_skills.value==""){
+			skillErr++;
+			professional_skills.style.border='1px solid red'
+		}else{
+			professional_skills.style.border='1px solid green'
+		}
+
+		if(technical_skills.value==""){
+			skillErr++;
+			technical_skills.style.border='1px solid red'
+		}else{
+			technical_skills.style.border='1px solid green'
+		}
+
+		if(language_proficiency.value==""){
+			skillErr++;
+			language_proficiency.style.border='1px solid red'
+		}else{
+			language_proficiency.style.border='1px solid green'
+		}
+
+		if(certifications.value==""){
+			skillErr++;
+			certifications.style.border='1px solid red'
+		}else{
+			certifications.style.border='1px solid green'
+		}
+
+		if(additional_notes.value==""){
+			skillErr++;
+			additional_notes.style.border='1px solid red'
+		}else{
+			additional_notes.style.border='1px solid green'
+		}
+
+		if(skillErr == 0){
 			// $('.btnNext').click(function() {
 			  const nextTabLinkEl = $('.nav-alltabs .active').closest('li').next('li').find('a')[0];
 			  const nextTab = new bootstrap.Tab(nextTabLinkEl);

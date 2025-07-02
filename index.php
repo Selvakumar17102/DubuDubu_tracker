@@ -56,6 +56,9 @@
     		width: 400px;
     		max-width: 1200px;
 		}
+		.bg-warning {
+			background-color: #fede00 !important; /* Override the default */
+		}
 	</style>
 	
 	<body class="sign-inup" id="body">
@@ -84,7 +87,7 @@
                   <i class="far fa-eye position-absolute" id="togglePassword" style="top: 12px; right: 10px; cursor: pointer;"></i>
                 </div>
         
-                <button type="button" name="signin" id="signin" class="btn btn-warning w-100 mb-3">Sign In</button>
+                <button type="button" name="signin" id="signin" class="btn bg-warning w-100 mb-3">Sign In</button>
               </form>
             </div>
         
